@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karan Kumar — CyberSec Portfolio 9999</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon-cyan: #00f5ff;
+    --neon-purple: #bf00ff;
+    --neon-green: #00ff88;
+    --neon-red: #ff003c;
+    --dark-bg: #020510;
+    --card-bg: #050d1a;
+    --grid-line: rgba(0,245,255,0.07);
+    --text-primary: #e8f4ff;
+    --text-dim: #7a9ab0;
+    --border-glow: rgba(0,245,255,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    font-family: 'Exo 2', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Floating particles canvas */
+  #particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 0 40px;
+    position: relative;
+  }
+
+  .hero-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--neon-green);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-badge::before {
+    content: '[ ';
+  }
+  .hero-badge::after {
+    content: ' ]';
+  }
+
+  .avatar-ring {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 36px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .avatar-ring svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    animation: spin 8s linear infinite;
+  }
+
+  .avatar-inner {
+    position: absolute;
+    top: 12px; left: 12px;
+    right: 12px; bottom: 12px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0a1628 0%, #050d1a 100%);
+    border: 2px solid rgba(0,245,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', monospace;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 20px var(--neon-cyan), 0 0 40px rgba(0,245,255,0.4);
+  }
+
+  .hero-name {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(36px, 7vw, 72px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: 4px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+    background: linear-gradient(90deg, var(--neon-cyan), #ffffff, var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 15px;
+    color: var(--neon-cyan);
+    letter-spacing: 3px;
+    margin: 16px 0 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-title .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 14px;
+    background: var(--neon-cyan);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--neon-cyan);
+    display: block;
+    text-shadow: 0 0 15px rgba(0,245,255,0.5);
+  }
+
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .hero-contact {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+
+  .contact-chip {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--neon-cyan);
+    border: 1px solid rgba(0,245,255,0.3);
+    padding: 8px 16px;
+    border-radius: 2px;
+    background: rgba(0,245,255,0.05);
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-chip::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,245,255,0.15), transparent);
+    transition: left 0.4s;
+  }
+
+  .contact-chip:hover::before { left: 100%; }
+  .contact-chip:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0,245,255,0.2);
+    color: #fff;
+  }
+
+  /* ========== SECTIONS ========== */
+  .section {
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .section-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    color: var(--neon-purple);
+    letter-spacing: 2px;
+    opacity: 0.7;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0,245,255,0.4), transparent);
+  }
+
+  /* ========== CARDS ========== */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid rgba(0,245,255,0.12);
+    border-radius: 4px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+  }
+
+  .card:hover {
+    border-color: rgba(0,245,255,0.3);
+    box-shadow: 0 0 30px rgba(0,245,255,0.08), inset 0 0 60px rgba(0,245,255,0.02);
+  }
+
+  .card-scanline {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0,245,255,0.6), transparent);
+    animation: scanLine 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover .card-scanline {
+    opacity: 1;
+  }
+
+  /* ========== EXPERIENCE ========== */
+  .exp-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .exp-company {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--neon-cyan);
+    letter-spacing: 1px;
+  }
+
+  .exp-role {
+    font-size: 13px;
+    color: var(--neon-purple);
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  .exp-duration {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    border: 1px solid rgba(0,245,255,0.15);
+    padding: 4px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .exp-desc {
+    font-size: 14px;
+    color: #8ba8c0;
+    line-height: 1.7;
+    margin-top: 10px;
+  }
+
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--neon-green);
+    border: 1px solid rgba(0,255,136,0.25);
+    padding: 3px 10px;
+    border-radius: 2px;
+    background: rgba(0,255,136,0.05);
+    letter-spacing: 1px;
+  }
+
+  /* ========== SKILLS ========== */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .skill-category {
+    margin-bottom: 20px;
+  }
+
+  .skill-cat-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--neon-purple);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .skill-cat-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(191,0,255,0.2);
+  }
+
+  .skill-bar-wrap {
+    margin-bottom: 12px;
+  }
+
+  .skill-bar-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: var(--text-primary);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .skill-bar-pct {
+    color: var(--neon-cyan);
+    font-size: 11px;
+  }
+
+  .skill-bar-bg {
+    height: 4px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .skill-bar-fill.cyan {
+    background: linear-gradient(90deg, rgba(0,245,255,0.6), var(--neon-cyan));
+    box-shadow: 0 0 8px rgba(0,245,255,0.4);
+  }
+
+  .skill-bar-fill.purple {
+    background: linear-gradient(90deg, rgba(191,0,255,0.6), var(--neon-purple));
+    box-shadow: 0 0 8px rgba(191,0,255,0.4);
+  }
+
+  .skill-bar-fill.green {
+    background: linear-gradient(90deg, rgba(0,255,136,0.6), var(--neon-green));
+    box-shadow: 0 0 8px rgba(0,255,136,0.4);
+  }
+
+  /* ========== EDUCATION ========== */
+  .edu-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .edu-degree {
+    font-family: 'Orbitron', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .edu-institution {
+    font-size: 13px;
+    color: var(--neon-cyan);
+    font-family: 'Share Tech Mono', monospace;
+    margin-bottom: 8px;
+  }
+
+  .edu-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .edu-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+
+  .edu-badge.grade {
+    color: var(--neon-green);
+    border: 1px solid rgba(0,255,136,0.3);
+    background: rgba(0,255,136,0.06);
+  }
+
+  .edu-badge.year {
+    color: var(--text-dim);
+    border: 1px solid rgba(120,160,180,0.2);
+    background: rgba(120,160,180,0.04);
+  }
+
+  .edu-badge.status {
+    color: var(--neon-cyan);
+    border: 1px solid rgba(0,245,255,0.3);
+    background: rgba(0,245,255,0.06);
+  }
+
+  /* ========== ACHIEVEMENTS ========== */
+  .achieve-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .achieve-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(0,245,255,0.1);
+    border-radius: 4px;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .achieve-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+
+  .achieve-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  .achieve-card:hover {
+    border-color: rgba(0,245,255,0.25);
+    box-shadow: 0 0 25px rgba(0,245,255,0.07);
+    transform: translateY(-3px);
+  }
+
+  .achieve-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .achieve-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--neon-cyan);
+    display: block;
+    text-shadow: 0 0 15px rgba(0,245,255,0.4);
+    margin-bottom: 6px;
+  }
+
+  .achieve-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  /* ========== OBJECTIVE ========== */
+  .objective-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #8ba8c0;
+    border-left: 2px solid rgba(0,245,255,0.4);
+    padding-left: 24px;
+    font-style: italic;
+  }
+
+  /* ========== SALARY STRIP ========== */
+  .salary-strip {
+    background: linear-gradient(90deg, rgba(0,245,255,0.05), rgba(191,0,255,0.05));
+    border: 1px solid rgba(0,245,255,0.15);
+    border-radius: 4px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 80px;
+  }
+
+  .salary-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .salary-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--neon-green);
+    text-shadow: 0 0 12px rgba(0,255,136,0.4);
+  }
+
+  .status-pill {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--neon-cyan);
+    border: 1px solid rgba(0,245,255,0.3);
+    padding: 6px 16px;
+    border-radius: 2px;
+    background: rgba(0,245,255,0.05);
+    letter-spacing: 2px;
+  }
+
+  /* ========== LOCATION ========== */
+  .location-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .location-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--neon-green);
+    box-shadow: 0 0 8px var(--neon-green);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  .location-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    text-align: center;
+    border-top: 1px solid rgba(0,245,255,0.1);
+    padding-top: 40px;
+  }
+
+  .footer-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+  }
+
+  .footer-year {
+    color: var(--neon-cyan);
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+  }
+
+  /* ========== ANIMATIONS ========== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes scanLine {
+    0% { top: -2px; }
+    100% { top: 100%; }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 6px var(--neon-green); }
+    50% { box-shadow: 0 0 14px var(--neon-green), 0 0 20px rgba(0,255,136,0.4); }
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.8; }
+    94% { opacity: 1; }
+    96% { opacity: 0.9; }
+    97% { opacity: 1; }
+  }
+
+  .hero-name { animation: fadeUp 0.8s 0.6s forwards, flicker 6s 3s infinite; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--dark-bg); }
+  ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.3); border-radius: 2px; }
+
+  @media (max-width: 600px) {
+    .page-wrap { padding: 0 16px 60px; }
+    .card { padding: 20px; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-badge">Penetration Tester &amp; CyberSec Specialist</p>
+
+    <div class="avatar-ring">
+      <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="70" cy="70" r="65" stroke="url(#ringGrad)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.6"/>
+        <circle cx="70" cy="70" r="56" stroke="rgba(0,245,255,0.2)" stroke-width="0.5"/>
+        <circle cx="70" cy="5" r="3" fill="#00f5ff" opacity="0.9"/>
+        <circle cx="70" cy="135" r="2" fill="#bf00ff" opacity="0.7"/>
+        <circle cx="5" cy="70" r="2" fill="#00ff88" opacity="0.6"/>
+        <circle cx="135" cy="70" r="2.5" fill="#00f5ff" opacity="0.8"/>
+        <defs>
+          <linearGradient id="ringGrad" x1="0" y1="0" x2="140" y2="140">
+            <stop offset="0%" stop-color="#00f5ff"/>
+            <stop offset="50%" stop-color="#bf00ff"/>
+            <stop offset="100%" stop-color="#00ff88"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="avatar-inner">KK</div>
+    </div>
+
+    <h1 class="hero-name">KARAN KUMAR</h1>
+
+    <p class="hero-title">
+      <span id="typewriter"></span><span class="cursor"></span>
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-value">100+</span>
+        <span class="stat-label">TryHackMe Labs</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">6 Mo</span>
+        <span class="stat-label">Pen Testing Intern</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">A+</span>
+        <span class="stat-label">CyberSec Diploma</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">5+</span>
+        <span class="stat-label">Tools Mastered</span>
+      </div>
+    </div>
+
+    <div class="hero-contact">
+      <a class="contact-chip" href="tel:+919911690278">+91 9911690278</a>
+      <a class="contact-chip" href="mailto:karan.kumar.cybersec@gmail.com">karan.kumar.cybersec@gmail.com</a>
+      <a class="contact-chip" href="https://www.linkedin.com/in/karan-kumar-80b695375">LinkedIn Profile</a>
+    </div>
+
+    <div class="location-row" style="margin-top: 24px;">
+      <div class="location-dot"></div>
+      <span class="location-text">SECTOR 80, NOIDA, UTTAR PRADESH, INDIA</span>
+    </div>
+  </section>
+
+  <!-- SALARY / STATUS STRIP -->
+  <div class="salary-strip">
+    <div>
+      <div class="salary-label">Expected Compensation</div>
+      <div class="salary-value">₹18,000 – ₹20,000 / mo</div>
+    </div>
+    <div class="status-pill">OPEN TO OPPORTUNITIES</div>
+  </div>
+
+  <!-- OBJECTIVE -->
+  <section class="section" id="sec-obj">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Objective</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="card">
+      <div class="card-scanline"></div>
+      <p class="objective-text">
+        To work in an organization where I can learn new skills and improve my knowledge, contributing effectively to the growth of the organization while developing my professional abilities — forging expertise in the art of ethical intrusion and digital defense.
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="sec-skills">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Technical Arsenal</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="card">
+        <div class="card-scanline"></div>
+        <div class="skill-category">
+          <div class="skill-cat-title">Security &amp; Pentesting</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Web Application Penetration Testing</span><span class="skill-bar-pct">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill cyan" data-w="75"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Network Penetration Testing</span><span class="skill-bar-pct">65%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill cyan" data-w="65"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Vulnerability Assessment (VAPT)</span><span class="skill-bar-pct">70%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill cyan" data-w="70"></div></div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-title">Tools</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Burp Suite</span><span class="skill-bar-pct">70%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill purple" data-w="70"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Nmap / ZenMap</span><span class="skill-bar-pct">72%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill purple" data-w="72"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>SQLmap</span><span class="skill-bar-pct">60%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill purple" data-w="60"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-scanline"></div>
+        <div class="skill-category">
+          <div class="skill-cat-title">Operating Systems</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Kali Linux</span><span class="skill-bar-pct">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill green" data-w="75"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Arch Linux</span><span class="skill-bar-pct">35%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill green" data-w="35"></div></div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-title">General &amp; Productivity</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>MS Office / Excel</span><span class="skill-bar-pct">80%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill green" data-w="80"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Basic Networking</span><span class="skill-bar-pct">65%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill green" data-w="65"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>E-Commerce Operations</span><span class="skill-bar-pct">78%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill green" data-w="78"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="sec-exp">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Experience Log</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="exp-grid">
+      <div class="card">
+        <div class="card-scanline"></div>
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">GICSEH Data Security Pvt. Ltd.</div>
+            <div class="exp-role">Penetration Tester Intern</div>
+          </div>
+          <div class="exp-duration">6 MONTHS</div>
+        </div>
+        <p class="exp-desc">
+          Conducted penetration testing engagements on a global institution's web infrastructure to identify and document critical security vulnerabilities. Applied real-world attack techniques in a controlled, authorized setting to surface exploitable weaknesses.
+        </p>
+        <div class="exp-tags">
+          <span class="tag">WAPT</span>
+          <span class="tag">Vulnerability Scanning</span>
+          <span class="tag">Report Writing</span>
+          <span class="tag">Ethical Hacking</span>
+          <span class="tag">Burp Suite</span>
+          <span class="tag">Nmap</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-scanline"></div>
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Imvelo HomeCare</div>
+            <div class="exp-role">E-Commerce Executive</div>
+          </div>
+          <div class="exp-duration">2023–2024</div>
+        </div>
+        <p class="exp-desc">
+          Managed Flipkart platform operations end-to-end — including product listing creation, sales report reconciliation, and campaign monitoring. Also operated across Blinkit, Amazon, Meesho, and Swiggy Instamart, building cross-platform digital commerce competency.
+        </p>
+        <div class="exp-tags">
+          <span class="tag">Flipkart</span>
+          <span class="tag">Amazon</span>
+          <span class="tag">Meesho</span>
+          <span class="tag">Blinkit</span>
+          <span class="tag">Data Reconciliation</span>
+          <span class="tag">Campaign Mgmt</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section" id="sec-edu">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Training Matrix</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="card">
+        <div class="card-scanline"></div>
+        <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+        <div class="edu-institution">Chaudhary Charan Singh University</div>
+        <div class="edu-meta">
+          <span class="edu-badge status">IN PROGRESS — 2026</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-scanline"></div>
+        <div class="edu-degree">Diploma in Cyber Security &amp; Ethical Hacking</div>
+        <div class="edu-institution">Global Institution of Cyber Security and Ethical Hacking (GICSEH)</div>
+        <div class="edu-meta">
+          <span class="edu-badge grade">GRADE: A+</span>
+          <span class="edu-badge year">2025</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-scanline"></div>
+        <div class="edu-degree">Diploma in Computer Application</div>
+        <div class="edu-institution">Softnick Computer Institution</div>
+        <div class="edu-meta">
+          <span class="edu-badge grade">GRADE: A+</span>
+          <span class="edu-badge year">2023</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-scanline"></div>
+        <div class="edu-degree">Intermediate (10+2)</div>
+        <div class="edu-institution">Shahid Bhagat Singh Inter College</div>
+        <div class="edu-meta">
+          <span class="edu-badge grade">GRADE: A</span>
+          <span class="edu-badge year">2022</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="section" id="sec-achieve">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Combat Record</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="achieve-grid">
+      <div class="achieve-card">
+        <div class="achieve-icon">🎯</div>
+        <span class="achieve-num">100+</span>
+        <span class="achieve-label">TryHackMe Labs Completed</span>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">🔐</div>
+        <span class="achieve-num">✓</span>
+        <span class="achieve-label">PortSwigger Web Security Labs</span>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">📦</div>
+        <span class="achieve-num">HTB</span>
+        <span class="achieve-label">Hack The Box Learning Modules</span>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">🛡️</div>
+        <span class="achieve-num">A+</span>
+        <span class="achieve-label">Dual Diploma — Top Grade</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-text">
+      &copy; <span class="footer-year">9999</span> — KARAN KUMAR // CYBERSEC OPERATIVE // NOIDA, INDIA
+    </p>
+    <p class="footer-text" style="margin-top: 8px; opacity: 0.5;">
+      ALL SYSTEMS NOMINAL // GRID ONLINE // AUTHORIZATION: ACTIVE
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * 2000,
+      y: Math.random() * 2000,
+      r: Math.random() * 1.5 + 0.3,
+      vx: (Math.random() - 0.5) * 0.2,
+      vy: (Math.random() - 0.5) * 0.2,
+      alpha: Math.random() * 0.5 + 0.1,
+      color: ['#00f5ff','#bf00ff','#00ff88'][Math.floor(Math.random()*3)]
+    });
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+
+  // Typewriter
+  const phrases = [
+    'PENETRATION TESTER',
+    'ETHICAL HACKER',
+    'WAPT SPECIALIST',
+    'SECURITY RESEARCHER',
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const tw = document.getElementById('typewriter');
+
+  function type() {
+    const phrase = phrases[pi];
+    if (!deleting) {
+      tw.textContent = phrase.slice(0, ++ci);
+      if (ci === phrase.length) {
+        deleting = true;
+        setTimeout(type, 2000);
+        return;
+      }
+    } else {
+      tw.textContent = phrase.slice(0, --ci);
+      if (ci === 0) {
+        deleting = false;
+        pi = (pi + 1) % phrases.length;
+      }
+    }
+    setTimeout(type, deleting ? 60 : 90);
+  }
+  setTimeout(type, 1800);
+
+  // Scroll reveal
+  const sections = document.querySelectorAll('.section');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // Animate skill bars
+        e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.w + '%';
+        });
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
